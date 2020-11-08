@@ -83,6 +83,12 @@ function! filterops#FilterThroughCommand(lines)
     endif
 endfunction
 
+function! filterops#TitleCase(lines)
+    let lines = copy(a:lines)
+    call map(lines, {k,v -> substitute(v, '\<\(\w\+\)\>', '\L\u\1', 'g') })
+    return lines
+endfunction
+
 function! s:systemlist(cmd, input)
     let result = systemlist(a:cmd, a:input)
     call map(result, {k, v -> substitute(v, '\r$', '', '') })

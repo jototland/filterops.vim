@@ -47,6 +47,12 @@ FilterMap
     \ <plug>(filter)
     \ function("filterops#FilterThroughCommand")
 
+FilterMap
+    \ <plug>(titlecase)
+    \ <plug>(titlecase-line)
+    \ <plug>(titlecase)
+    \ function("filterops#TitleCase")
+
 if !exists("g:filterops_no_default_maps")
     nmap yt <plug>(yank-to-visible-terminals)
     nmap ytt <plug>(yank-line-to-visible-terminals)
@@ -59,4 +65,8 @@ if !exists("g:filterops_no_default_maps")
     nmap ! <plug>(filter)
     nmap !! <plug>(filter-line)
     vmap ! <plug>(filter)
+
+    nmap g<c-u> <plug>(titlecase)
+    nmap g<c-u><c-u> <plug>(titlecase-line)
+    vmap g<c-u> <plug>(titlecase)
 endif

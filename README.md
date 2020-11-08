@@ -71,6 +71,18 @@ work with any kind of selection or text object, even blockwise. So if you want
 to use an external command to sort a rectangular selection, now it can be done. 
 
 
+Title case
+---
+
+<plug>(titlecase)
+<plug>(titlecase-line)
+g<c-u>{motion}
+g<c-u><c-u>
+{Visual}g<c-u>
+
+These operators or visual mode mappings are intended as a supplement to the
+built-in |gu| and |gU| mappings. It will title case each word in the motion,
+text-object or selection.
 The FilterMap command
 ---
 
