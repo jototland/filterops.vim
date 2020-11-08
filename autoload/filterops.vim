@@ -34,7 +34,7 @@ endfunction
 
 function! filterops#YankToVisibleTerminals(lines) abort
     let oldwin = winnr()
-    let count = 0
+    let wcount = 0
     if type(a:lines) ==# v:t_list
         let text = join(a:lines, "\r") . "\r"
     elseif type(a:lines) ==# v:t_string
@@ -46,7 +46,7 @@ function! filterops#YankToVisibleTerminals(lines) abort
         let type = getbufvar(buf, "&buftype")
         let skip = getbufvar(buf, "yank_to_visible_terminals_skip_this", 0)
         if type ==# "terminal" && !skip
-            let count += 1
+            let wcount += 1
             if has("nvim")
                 let jobid = getbufvar(buf, "terminal_job_id", 0)
                 call jobsend(jobid, text)
@@ -59,7 +59,7 @@ function! filterops#YankToVisibleTerminals(lines) abort
             endif
         endif
     endfor
-    if count ==# 0
+    if wcount ==# 0
         call s:printError("No visible terminals")
     endif
 endfunction
