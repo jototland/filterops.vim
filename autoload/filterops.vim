@@ -83,7 +83,7 @@ function! filterops#FilterThroughCommand(lines)
     endif
 endfunction
 
-function! filterops#TitleCase(lines)
+function! filterops#ProperCase(lines)
     let lines = copy(a:lines)
     call map(lines, {k,v -> substitute(v, '\<\(\w\+\)\>', '\L\u\1', 'g') })
     return lines
