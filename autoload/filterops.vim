@@ -9,18 +9,22 @@ if exists("g:autoloaded_filterops")
 endif
 let g:autoloaded_filterops = 1
 
+function! filterops#set(Func) abort
+    let s:filter = a:Func
+endfunction
+
 function! filterops#Filter(mode) abort
     let lines = filterops#GetLines(a:mode)
     try
-        if type(g:FILTEROPS_FILTER) ==# v:t_string
-            let result = s:systemlist(g:FILTEROPS_FILTER, lines)
+        if type(s:filter) ==# v:t_string
+            let result = s:systemlist(s:filter, lines)
             if len(result) > 0
                 call filterops#SetLines(a:mode, result)
             else
-                call s:printError("External command: " . g:FILTEROPS_FILTER . " failed!")
+                call s:printError("External command: " . s:filter . " failed!")
             endif
-        elseif type(g:FILTEROPS_FILTER) ==# v:t_func
-            let result = g:FILTEROPS_FILTER(lines)
+        elseif type(s:filter) ==# v:t_func
+            let result = s:filter(lines)
             if type(result) ==# v:t_list
                 call filterops#SetLines(a:mode, result)
             endif
@@ -74,12 +78,12 @@ endfunction
 
 function! filterops#FilterThroughCommand(lines)
     let cmd = input('filter through which command?> ')
-    let g:FILTEROPS_FILTER=cmd
-    let result = s:systemlist(g:FILTEROPS_FILTER, a:lines)
+    let s:filter=cmd
+    let result = s:systemlist(s:filter, a:lines)
     if len(result) > 0
         return result
     else
-        call s:printError("External command: '" . g:FILTEROPS_FILTER . "' failed!")
+        call s:printError("External command: '" . s:filter . "' failed!")
     endif
 endfunction
 

@@ -8,12 +8,12 @@ Version: 1.0
 Introduction
 ---
 
-This plugin adds some useful helpers to create operator mappings/visual
-mappings, building on top of operatorfunc. Instead of the low-level interface
+This *plugin* adds some useful helpers to create operator mappings/visual
+mappings, _building_ on top of operatorfunc. Instead of the low-level interface
 offered by native Vim, they operate by "filtering" lines of text, with the
 result of the filtering function (or command) replacing the original text.
 
-In addition, it defines three useful vim operator mappings.
+In addition, it defines some useful vim operator mappings.
 
 
 Yank to visible terminals
@@ -158,22 +158,23 @@ The machinery behind filtermap
 ---
 
     filterops#Filter(mode)
-    g:FILTEROPS_FILTER
+    filterops#set
 
 `filterops#Filter()` is a function that takes the text contained in the
-motion, text-object or visual selection, runs it through the filter stored in
-`g:FILTEROPS_FILTER`, and replaces the original text with the result of the
+motion, text-object or visual selection, runs it through the filter set with
+`filterops#set()` and replaces the original text with the result of the
 operation. 
 
-If `g:FILTEROPS_FILTER` is a string, the selection or motion is piped through an
-external command, and replaced with the output of that command.
+If the filter set with `filterops#set()` is a string, the selection or motion is
+piped through an external command, and replaced with the output of that
+command.
 
-If `g:FILTEROPS_FILTER` is a funcref, the selection or motion is passed to this
-function as a list of lines, and replaced with the return value of the function
-(which should also be a list of lines).
+If the filter set with `filterops#set()` is a funcref, the selection or motion is
+passed to this function as a list of lines, and replaced with the return value
+of the function (which should also be a list of lines).
 
-(A close analogue of `filterops#Filter()` and `g:FILTEROPS_FILTER` is the
-built-in `g@` operator and `operatorfunc`).
+    (A close analogue of `filterops#Filter()` and `filterops#set()` is the
+    built-in `g@` operator and `'operatorfunc'`).
 
 Skipping default mappings
 ---

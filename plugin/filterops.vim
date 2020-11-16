@@ -15,14 +15,14 @@ endfunction
 
 function! s:FilterMap(opmap, linemap, vmap, filter)
     execute "nnoremap <silent> " . a:opmap . " " .
-        \ ":<c-u>let g:FILTEROPS_FILTER=" . a:filter . "<cr>" .
+        \ ":<c-u>call filterops#set(" . a:filter . ")<cr>" .
         \ ":set operatorfunc=filterops#Filter<cr>g@"
     execute 'nnoremap <silent> <expr> ' . a:linemap .
-        \ ' ":\<c-u>let g:FILTEROPS_FILTER=' .
-        \ s:esc(a:filter) . '\<cr>:set operatorfunc=filterops#Filter\<cr>g@" .
+        \ ' ":\<c-u>call filterops#set(' .
+        \ s:esc(a:filter) . ')\<cr>:set operatorfunc=filterops#Filter\<cr>g@" .
         \ (v:count ? string(v:count) : "") . "_"'
     execute "vnoremap <silent> " . a:vmap . " " .
-        \ ":<c-u>let g:FILTEROPS_FILTER=" . a:filter . "<cr>" .
+        \ ":<c-u>call filterops#set(" . a:filter . ")<cr>" .
         \ ":<c-u>call filterops#Filter(visualmode())<cr>"
 endfunction
 
