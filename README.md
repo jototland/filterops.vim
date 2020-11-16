@@ -8,8 +8,8 @@ Version: 1.0
 Introduction
 ---
 
-This *plugin* adds some useful helpers to create operator mappings/visual
-mappings, _building_ on top of operatorfunc. Instead of the low-level interface
+This plugin adds some useful helpers to create operator mappings/visual
+mappings, building on top of operatorfunc. Instead of the low-level interface
 offered by native Vim, they operate by "filtering" lines of text, with the
 result of the filtering function (or command) replacing the original text.
 
